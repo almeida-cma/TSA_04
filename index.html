@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aplicativos: O Mundo na Palma da Mão 📱 | Guia Interativo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #0a0f1f;
+      --card: #16213e;
+      --accent: #00d4ff;
+      --accent2: #e94560;
+      --accent3: #0f3460;
+      --accent4: #f9a826;
+      --text: #f0f0f0;
+      --muted: #a0a0c0;
+      --success: #4caf50;
+      --warning: #f59e0b;
+      --social: #4267B2;
+      --entertainment: #e94560;
+      --productivity: #00b894;
+      --compression: #fdcb6e;
+      --health: #00cec9;
+      --finance: #6c5ce7;
+      --navigation: #0984e3;
+      --education: #e84342;
+    }
+
+    * { 
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
+      background: radial-gradient(circle at 30% 10%, #1a2a4a, var(--bg) 80%);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Partículas */
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background: var(--accent);
+      border-radius: 50%;
+      opacity: 0.1;
+      animation: float 25s infinite linear;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-40px) rotate(180deg); }
+    }
+
+    /* Cabeçalho */
+    header {
+      padding: 4rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.2), transparent 70%);
+      z-index: -1;
+    }
+
+    .glitch {
+      position: relative;
+      font-size: 4rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                  -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                  0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+      animation: glitch 3s infinite;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      2% { transform: translate(-2px, 2px); }
+      4% { transform: translate(-2px, -2px); }
+      6% { transform: translate(2px, 2px); }
+      8% { transform: translate(2px, -2px); }
+      10% { transform: translate(0); }
+      100% { transform: translate(0); }
+    }
+
+    header p {
+      max-width: 800px;
+      margin: 2rem auto;
+      font-size: 1.2rem;
+      color: var(--muted);
+    }
+
+    .typed-text {
+      color: var(--accent2);
+      border-right: 2px solid var(--accent2);
+      padding-right: 5px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: var(--accent2); }
+      50% { border-color: transparent; }
+    }
+
+    /* Seções */
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 4rem 1.5rem;
+      position: relative;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: linear-gradient(145deg, rgba(22, 33, 62, 0.95), rgba(10, 15, 30, 0.95));
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    .card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 25px 50px rgba(0, 212, 255, 0.3);
+    }
+
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--accent2);
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
+
+    .tab-btn {
+      padding: 1rem 2rem;
+      border-radius: 2rem;
+      border: none;
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .tab-btn:hover {
+      background: rgba(0, 212, 255, 0.2);
+    }
+
+    .tab-btn.active {
+      background: rgba(0, 212, 255, 0.3);
+      border-color: var(--accent2);
+    }
+
+    .tab-content {
+      background: rgba(22, 33, 62, 0.8);
+      border-radius: 2rem;
+      padding: 2rem;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* App Cards por categoria */
+    .app-category {
+      margin-bottom: 2rem;
+    }
+
+    .category-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      border-left: 5px solid;
+    }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .app-item {
+      background: rgba(0,0,0,0.2);
+      border-radius: 1rem;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+    }
+
+    .app-item:hover {
+      transform: scale(1.05);
+      border-color: var(--accent2);
+      background: rgba(233, 69, 96, 0.1);
+    }
+
+    .app-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .app-name {
+      font-weight: bold;
+    }
+
+    /* Algoritmo Simulador */
+    .algorithm-simulator {
+      background: rgba(22, 33, 62, 0.9);
+      border-radius: 2rem;
+      padding: 2rem;
+      margin: 3rem 0;
+      border: 2px solid var(--accent);
+    }
+
+    .flowchart {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 2rem 0;
+    }
+
+    .flow-step {
+      background: var(--card);
+      padding: 1rem 2rem;
+      border-radius: 2rem;
+      border: 2px solid var(--accent2);
+      width: 80%;
+      text-align: center;
+    }
+
+    .flow-arrow-down {
+      font-size: 1.5rem;
+      color: var(--accent2);
+    }
+
+    .decision {
+      background: var(--accent3);
+      padding: 1rem 2rem;
+      border-radius: 1rem;
+      width: 80%;
+      text-align: center;
+      border: 2px dashed var(--accent4);
+    }
+
+    .code-block {
+      background: #0a0a1a;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      font-family: 'Courier New', monospace;
+      color: #00ffaa;
+      margin: 1rem 0;
+    }
+
+    /* Compactador Simulador */
+    .compressor-sim {
+      background: rgba(22, 33, 62, 0.9);
+      border-radius: 2rem;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .file-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      justify-content: center;
+    }
+
+    .file-item {
+      background: rgba(0,0,0,0.3);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      width: 120px;
+      text-align: center;
+      border: 1px solid var(--muted);
+    }
+
+    .file-size {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .compress-btn {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 2rem;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 1rem 0;
+    }
+
+    /* Sistema Computacional */
+    .system-diagram {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin: 3rem 0;
+      background: rgba(0,0,0,0.3);
+      padding: 2rem;
+      border-radius: 2rem;
+    }
+
+    .system-box {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      min-width: 150px;
+      text-align: center;
+      border: 2px solid var(--accent);
+    }
+
+    .system-arrow {
+      font-size: 2rem;
+      color: var(--accent2);
+    }
+
+    /* Terminal */
+    .terminal {
+      background: #0a0a1a;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 1rem;
+      color: #00ffaa;
+      margin: 2rem 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+    }
+
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    .terminal-dot.red { background: #ff5f56; }
+    .terminal-dot.yellow { background: #ffbd2e; }
+    .terminal-dot.green { background: #27ca3f; }
+
+    /* Progresso */
+    .progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(22, 33, 62, 0.8);
+      z-index: 1000;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(0, 212, 255, 0.2);
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .glitch { font-size: 2.5rem; }
+      .system-diagram { flex-direction: column; }
+      .system-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div id="particles"></div>
+
+  <header>
+    <div class="header-bg"></div>
+    <div class="title-container">
+      <h1 class="glitch">APLICATIVOS<span class="glitch"></span><span class="glitch"></span></h1>
+      <h2 style="font-size: 3rem; margin-top: 0.5rem;">O MUNDO NA PALMA DA MÃO 📱</h2>
+    </div>
+    <p>Redes sociais, jogos, bancos, mapas, produtividade... tudo em aplicativos!</p>
+    <p style="margin-top: 1rem;">
+      <span class="typed-text" id="typedText"></span>
+    </p>
+  </header>
+
+  <!-- Seção 1: O que são Aplicativos -->
+  <section>
+    <h2 class="section-title fade-in">📱 O que são Aplicativos?</h2>
+    <div class="grid">
+      <div class="card fade-in">
+        <div class="card-icon">📲</div>
+        <h3>Definição</h3>
+        <p>Programas de software projetados para executar funções específicas em dispositivos eletrônicos.</p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-icon">🚀</div>
+        <h3>Popularidade</h3>
+        <p>Crescimento explosivo com smartphones (Android e iOS). Milhões de apps disponíveis!</p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-icon">✨</div>
+        <h3>Benefícios</h3>
+        <p>Acesso rápido, simplificação de tarefas, conectividade, personalização, entretenimento.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 2: Como Funcionam (Tabs: Fluxo e Algoritmos) -->
+  <section>
+    <h2 class="section-title fade-in">⚙️ Como Funcionam os Apps</h2>
+    
+    <div class="tabs fade-in">
+      <button class="tab-btn active" onclick="showAppTab('flow')">Fluxo de Interação</button>
+      <button class="tab-btn" onclick="showAppTab('algorithm')">Algoritmos</button>
+    </div>
+
+    <div id="flow-tab" class="tab-content">
+      <h3>🔄 Ciclo de Interação</h3>
+      <div style="display: flex; flex-direction: column; align-items: center; margin: 2rem 0;">
+        <div style="background: var(--card); padding: 1rem 2rem; border-radius: 2rem; border: 2px solid var(--accent); width: 200px; text-align: center;">
+          👤 USUÁRIO<br><small>(entrada: toque, clique, digitação)</small>
+        </div>
+        <div style="font-size: 2rem; color: var(--accent2);">↓</div>
+        <div style="background: var(--card); padding: 1rem 2rem; border-radius: 2rem; border: 2px solid var(--accent); width: 200px; text-align: center;">
+          📱 APLICATIVO<br><small>(processamento)</small>
+        </div>
+        <div style="font-size: 2rem; color: var(--accent2);">↓</div>
+        <div style="background: var(--card); padding: 1rem 2rem; border-radius: 2rem; border: 2px solid var(--accent); width: 200px; text-align: center;">
+          📤 RESULTADO<br><small>(saída: informação, confirmação)</small>
+        </div>
+      </div>
+      <p><strong>Recursos adicionais:</strong> Conexão com servidores, sincronização, acesso à câmera, GPS, contatos.</p>
+    </div>
+
+    <div id="algorithm-tab" class="tab-content" style="display: none;">
+      <h3>🧠 Algoritmos: O Coração dos Apps</h3>
+      <p>Conjunto claro e finito de instruções para executar uma tarefa específica.</p>
+      
+      <div class="code-block">
+        <span style="color: #f9ca24;">SE</span> usuário clicou em "Entrar" <span style="color: #f9ca24;">ENTÃO</span><br>
+        &nbsp;&nbsp;VERIFICAR se usuário e senha estão corretos<br>
+        &nbsp;&nbsp;<span style="color: #f9ca24;">SE</span> estiverem corretos <span style="color: #f9ca24;">ENTÃO</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;ABRIR tela principal<br>
+        &nbsp;&nbsp;<span style="color: #f9ca24;">SENÃO</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;MOSTRAR mensagem de erro<br>
+        &nbsp;&nbsp;<span style="color: #f9ca24;">FIM SE</span><br>
+        <span style="color: #f9ca24;">FIM SE</span>
+      </div>
+      
+      <div class="grid" style="margin-top: 2rem;">
+        <div class="card">
+          <h4>Onde atuam</h4>
+          <ul style="list-style: none; padding: 0;">
+            <li>✓ Lógica de negócios</li>
+            <li>✓ Manipulação de dados</li>
+            <li>✓ Interface do usuário</li>
+            <li>✓ Comunicação com servidores</li>
+            <li>✓ Algoritmos avançados (IA, reconhecimento)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Importância</h4>
+          <p>Algoritmos eficientes = app rápido, confiável e com boa experiência do usuário.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 3: Tipos de Apps (Por Plataforma) -->
+  <section>
+    <h2 class="section-title fade-in">📲 Tipos de Apps (Plataforma)</h2>
+    
+    <div class="grid">
+      <div class="card fade-in">
+        <div class="card-icon">📱</div>
+        <h3>Apps Móveis</h3>
+        <p>Instalados na loja de apps (Google Play, App Store). Acessam recursos do dispositivo (câmera, GPS).</p>
+        <p><small>Ex: Instagram, WhatsApp, Uber</small></p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-icon">🌐</div>
+        <h3>WebApps</h3>
+        <p>Acessados via navegador. Não precisam ser instalados.</p>
+        <p><small>Ex: Gmail, Google Docs, Trello</small></p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-icon">🔄</div>
+        <h3>Apps Híbridos</h3>
+        <p>Combinam características de ambos. Instalados, mas usam tecnologia web.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 4: Tipos de Apps (Por Finalidade) -->
+  <section>
+    <h2 class="section-title fade-in">🎯 Tipos de Apps (Finalidade)</h2>
+    
+    <div class="app-category fade-in">
+      <h3 class="category-title" style="border-color: var(--social);">📱 Redes Sociais</h3>
+      <div class="app-grid">
+        <div class="app-item"><div class="app-icon">📘</div><div class="app-name">Facebook</div></div>
+        <div class="app-item"><div class="app-icon">📷</div><div class="app-name">Instagram</div></div>
+        <div class="app-item"><div class="app-icon">🐦</div><div class="app-name">Twitter/X</div></div>
+        <div class="app-item"><div class="app-icon">💼</div><div class="app-name">LinkedIn</div></div>
+        <div class="app-item"><div class="app-icon">🎵</div><div class="app-name">TikTok</div></div>
+        <div class="app-item"><div class="app-icon">💬</div><div class="app-name">WhatsApp</div></div>
+      </div>
+    </div>
+
+    <div class="app-category fade-in">
+      <h3 class="category-title" style="border-color: var(--entertainment);">🎮 Entretenimento</h3>
+      <div class="app-grid">
+        <div class="app-item"><div class="app-icon">🍬</div><div class="app-name">Candy Crush</div></div>
+        <div class="app-item"><div class="app-icon">🎵</div><div class="app-name">Spotify</div></div>
+        <div class="app-item"><div class="app-icon">🎬</div><div class="app-name">Netflix</div></div>
+        <div class="app-item"><div class="app-icon">📚</div><div class="app-name">Kindle</div></div>
+        <div class="app-item"><div class="app-icon">🕹️</div><div class="app-name">Pokémon GO</div></div>
+        <div class="app-item"><div class="app-icon">📺</div><div class="app-name">YouTube</div></div>
+      </div>
+    </div>
+
+    <div class="app-category fade-in">
+      <h3 class="category-title" style="border-color: var(--productivity);">💼 Produtividade</h3>
+      <div class="app-grid">
+        <div class="app-item"><div class="app-icon">📝</div><div class="app-name">Word</div></div>
+        <div class="app-item"><div class="app-icon">📊</div><div class="app-name">Excel</div></div>
+        <div class="app-item"><div class="app-icon">📽️</div><div class="app-name">PowerPoint</div></div>
+        <div class="app-item"><div class="app-icon">📧</div><div class="app-name">Outlook</div></div>
+        <div class="app-item"><div class="app-icon">📓</div><div class="app-name">OneNote</div></div>
+        <div class="app-item"><div class="app-icon">📅</div><div class="app-name">Google Drive</div></div>
+        <div class="app-item"><div class="app-icon">✅</div><div class="app-name">Trello</div></div>
+        <div class="app-item"><div class="app-icon">📏</div><div class="app-name">AutoCad</div></div>
+      </div>
+    </div>
+
+    <div class="app-category fade-in">
+      <h3 class="category-title" style="border-color: var(--compression);">🗜️ Compactadores</h3>
+      <div class="app-grid">
+        <div class="app-item"><div class="app-icon">🗜️</div><div class="app-name">WinRAR</div></div>
+        <div class="app-item"><div class="app-icon">📦</div><div class="app-name">7-Zip</div></div>
+      </div>
+      <div style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 1rem; margin-top: 1rem;">
+        <p><strong>Formatos suportados:</strong> RAR, ZIP, 7-ZIP, ACE, ARJ, BZ2, CAB, GZIP, ISO, JAR, LZH, TAR, UUE, XZ, Z</p>
+      </div>
+    </div>
+
+    <div class="app-category fade-in">
+      <h3 class="category-title" style="border-color: var(--health);">❤️ Saúde e Bem-estar</h3>
+      <div class="app-grid">
+        <div class="app-item"><div class="app-icon">🏃</div><div class="app-name">Fitbit</div></div>
+        <div class="app-item"><div class="app-icon">🍎</div><div class="app-name">MyFitnessPal</div></div>
+        <div class="app-item"><div class="app-icon">🧘</div><div class="app-name">Headspace</div></div>
+        <div class="app-item"><div class="app-icon">😴</div><div class="app-name">Sleep Cycle</div></div>
+        <div class="app-item"><div class="app-icon">🏥</div><div class="app-name">StarBem</div></div>
+        <div class="app-item"><div class="app-icon">👩‍⚕️</div><div class="app-name">iClinic</div></div>
+      </div>
+    </div>
+
+    <div class="app-category fade-in">
+      <h3 class="category-title" style="border-color: var(--finance);">💰 Compras e Finanças</h3>
+      <div class="app-grid">
+        <div class="app-item"><div class="app-icon">📦</div><div class="app-name">Amazon</div></div>
+        <div class="app-item"><div class="app-icon">🛒</div><div class="app-name">Mercado Livre</div></div>
+        <div class="app-item"><div class="app-icon">💳</div><div class="app-name">PayPal</div></div>
+        <div class="app-item"><div class="app-icon">🏦</div><div class="app-name">Nubank</div></div>
+        <div class="app-item"><div class="app-icon">📈</div><div class="app-name">Robinhood</div></div>
+        <div class="app-item"><div class="app-icon">💰</div><div class="app-name">GuiaBolso</div></div>
+      </div>
+    </div>
+
+    <div class="app-category fade-in">
+      <h3 class="category-title" style="border-color: var(--navigation);">🗺️ Navegação e Mapas</h3>
+      <div class="app-grid">
+        <div class="app-item"><div class="app-icon">🌍</div><div class="app-name">Google Maps</div></div>
+        <div class="app-item"><div class="app-icon">🚗</div><div class="app-name">Waze</div></div>
+        <div class="app-item"><div class="app-icon">🚕</div><div class="app-name">Uber</div></div>
+        <div class="app-item"><div class="app-icon">🚌</div><div class="app-name">Moovit</div></div>
+        <div class="app-item"><div class="app-icon">🌐</div><div class="app-name">Chrome</div></div>
+        <div class="app-item"><div class="app-icon">🦊</div><div class="app-name">Firefox</div></div>
+        <div class="app-item"><div class="app-icon">🧭</div><div class="app-name">Edge</div></div>
+      </div>
+    </div>
+
+    <div class="app-category fade-in">
+      <h3 class="category-title" style="border-color: var(--education);">📚 Educação</h3>
+      <div class="app-grid">
+        <div class="app-item"><div class="app-icon">🦉</div><div class="app-name">Duolingo</div></div>
+        <div class="app-item"><div class="app-icon">📖</div><div class="app-name">Khan Academy</div></div>
+        <div class="app-item"><div class="app-icon">🎓</div><div class="app-name">Coursera</div></div>
+        <div class="app-item"><div class="app-icon">📚</div><div class="app-name">Wikipedia</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 5: Simulador de Compactação -->
+  <section>
+    <h2 class="section-title fade-in">🗜️ Simulador de Compactação</h2>
+    
+    <div class="compressor-sim fade-in">
+      <h3>Arquivos para compactar:</h3>
+      <div class="file-list">
+        <div class="file-item">
+          <i class="fas fa-file-pdf" style="font-size: 2rem; color: var(--accent2);"></i>
+          <div>relatorio.pdf</div>
+          <div class="file-size">5.2 MB</div>
+        </div>
+        <div class="file-item">
+          <i class="fas fa-file-image" style="font-size: 2rem; color: var(--accent);"></i>
+          <div>foto.jpg</div>
+          <div class="file-size">3.8 MB</div>
+        </div>
+        <div class="file-item">
+          <i class="fas fa-file-word" style="font-size: 2rem; color: var(--accent4);"></i>
+          <div>documento.docx</div>
+          <div class="file-size">1.2 MB</div>
+        </div>
+      </div>
+      
+      <button class="compress-btn" onclick="compressFiles()">Compactar Arquivos 📦</button>
+      
+      <div id="compressionResult" style="display: none; background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 1rem; margin-top: 1rem;">
+        <h4>Resultado:</h4>
+        <p>Arquivo: <strong>arquivos.rar</strong></p>
+        <p>Tamanho original: <span style="color: var(--accent2);">10.2 MB</span></p>
+        <p>Tamanho compactado: <span style="color: var(--success);">6.8 MB</span></p>
+        <p>Economia: <span style="color: var(--success);">33%</span></p>
+      </div>
+      
+      <div style="margin-top: 2rem;">
+        <p><strong>WinRAR vs 7-Zip:</strong></p>
+        <ul>
+          <li><strong>WinRAR:</strong> Compacta RAR, ZIP, RAR5; descompacta vários formatos</li>
+          <li><strong>7-Zip:</strong> Código aberto; formato 7z (até 50% melhor que ZIP)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 6: Sistema Computacional -->
+  <section>
+    <h2 class="section-title fade-in">🖥️ Sistema Computacional</h2>
+    
+    <div class="system-diagram fade-in">
+      <div class="system-box">
+        <i class="fas fa-microchip" style="font-size: 2rem; color: var(--accent);"></i>
+        <h4>HARDWARE</h4>
+        <small>parte física</small>
+      </div>
+      <div class="system-arrow">+</div>
+      <div class="system-box">
+        <i class="fas fa-code" style="font-size: 2rem; color: var(--accent2);"></i>
+        <h4>SOFTWARE</h4>
+        <small>parte lógica</small>
+      </div>
+      <div class="system-arrow">=</div>
+      <div class="system-box">
+        <i class="fas fa-desktop" style="font-size: 2rem; color: var(--success);"></i>
+        <h4>SISTEMA</h4>
+        <small>computacional</small>
+      </div>
+    </div>
+    
+    <div class="grid" style="margin-top: 2rem;">
+      <div class="card fade-in">
+        <h4>Elementos do Sistema</h4>
+        <ul style="list-style: none; padding: 0;">
+          <li>✓ Hardware (parte física)</li>
+          <li>✓ Software (parte lógica)</li>
+          <li>✓ Informações (dados)</li>
+          <li>✓ Usuários</li>
+          <li>✓ Procedimentos</li>
+          <li>✓ Documentação</li>
+        </ul>
+      </div>
+      <div class="card fade-in">
+        <h4>Princípio Fundamental</h4>
+        <p>Hardware e software são interdependentes. Um não funciona sem o outro!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção 7: Curiosidades -->
+  <section>
+    <h2 class="section-title fade-in">🤔 Você Sabia?</h2>
+    <div class="terminal fade-in">
+      <div class="terminal-header">
+        <div class="terminal-dot red"></div>
+        <div class="terminal-dot yellow"></div>
+        <div class="terminal-dot green"></div>
+        <span style="margin-left: 1rem;">Curiosidades sobre Apps</span>
+      </div>
+      <div class="terminal-line">> O primeiro app da história foi um jogo (Snake) em 1997.</div>
+      <div class="terminal-line">> Existem mais de 5 milhões de apps na Google Play.</div>
+      <div class="terminal-line">> O WhatsApp foi comprado pelo Facebook por US$ 19 bilhões.</div>
+      <div class="terminal-line">> Apps de telemedicina cresceram 600% durante a pandemia.</div>
+      <div class="terminal-line">> O algoritmo do Waze usa dados de usuários para calcular rotas.</div>
+      <div class="terminal-line">> WinRAR tem um dos períodos de "trial" mais longos da história.</div>
+    </div>
+  </section>
+
+  <footer>
+    <div style="max-width: 800px; margin: 0 auto;">
+      <p>📱 <strong>Aplicativos: O Mundo na Palma da Mão</strong> - Entendendo os apps que usamos todos os dias.</p>
+      <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.7;">
+        Das redes sociais aos compactadores, algoritmos estão em todo lugar.
+      </p>
+      <div style="margin-top: 2rem;">
+        <a href="#" style="color: var(--muted); text-decoration: none;">← Voltar ao início</a>
+      </div>
+      <p style="margin-top: 2rem; font-size: 0.75rem; opacity: 0.5;">
+        Baseado nos estudos de sistemas de informação e desenvolvimento de aplicativos
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Inicialização
+    function initParticles() {
+      const particlesContainer = document.getElementById('particles');
+      for (let i = 0; i < 40; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        const size = Math.random() * 4 + 1;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.animationDelay = `${Math.random() * 20}s`;
+        particle.style.animationDuration = `${Math.random() * 10 + 15}s`;
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    function initTypedText() {
+      const texts = [
+        "Redes sociais, jogos, bancos, mapas...",
+        "Algoritmos estão em todo lugar!",
+        "WinRAR, 7-Zip, Netflix, Spotify...",
+        "Mais de 5 milhões de apps disponíveis...",
+        "Apps de telemedicina cresceram na pandemia..."
+      ];
+      let index = 0;
+      const typedElement = document.getElementById('typedText');
+      
+      function typeText() {
+        const text = texts[index];
+        typedElement.textContent = '';
+        let charIndex = 0;
+        
+        function typeChar() {
+          if (charIndex < text.length) {
+            typedElement.textContent += text.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeChar, 50);
+          } else {
+            setTimeout(() => deleteText(), 2000);
+          }
+        }
+        
+        function deleteText() {
+          if (typedElement.textContent.length > 0) {
+            typedElement.textContent = typedElement.textContent.slice(0, -1);
+            setTimeout(deleteText, 30);
+          } else {
+            index = (index + 1) % texts.length;
+            setTimeout(typeText, 500);
+          }
+        }
+        typeChar();
+      }
+      typeText();
+    }
+
+    function initScrollAnimations() {
+      const fadeElements = document.querySelectorAll('.fade-in');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.1 });
+      fadeElements.forEach(el => observer.observe(el));
+    }
+
+    function initProgressBar() {
+      const progressBar = document.getElementById('progressBar');
+      window.addEventListener('scroll', () => {
+        const winHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = (window.scrollY / winHeight) * 100;
+        progressBar.style.width = scrolled + '%';
+      });
+    }
+
+    // Tabs
+    function showAppTab(tab) {
+      document.getElementById('flow-tab').style.display = 'none';
+      document.getElementById('algorithm-tab').style.display = 'none';
+      document.getElementById(`${tab}-tab`).style.display = 'block';
+      
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    // Simulador de compactação
+    function compressFiles() {
+      const result = document.getElementById('compressionResult');
+      result.style.display = 'block';
+      
+      // Animar
+      result.style.opacity = '0';
+      setTimeout(() => {
+        result.style.transition = 'opacity 0.5s';
+        result.style.opacity = '1';
+      }, 100);
+    }
+
+    // Inicializar
+    document.addEventListener('DOMContentLoaded', () => {
+      initParticles();
+      initTypedText();
+      initScrollAnimations();
+      initProgressBar();
+    });
+  </script>
+</body>
+</html>
